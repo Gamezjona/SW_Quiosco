@@ -1,0 +1,10 @@
+# Habilitar el motor de reescritura
+RewriteEngine On
+
+# Redirigir todas las solicitudes a la carpeta Public
+RewriteCond %{REQUEST_URI} !^/Public/$
+RewriteRule .* - [L]
+
+# Opción para ocultar el directorio Public y redirigir a su contenido
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /Public/ [L]

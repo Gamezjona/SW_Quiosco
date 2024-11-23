@@ -1,0 +1,182 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.242), rgba(0, 0, 0, 0.336)),
+    url('https://img.freepik.com/foto-gratis/casa-aislada-arte-digital_23-2151041295.jpg') no-repeat center center/cover;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .wrapper {
+    width: 350px;
+    padding: 30px 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px); 
+    text-align: center;
+    position: relative;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .navLinks {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .navLinks .btnNavLink {
+    background: rgba(97, 4, 4, 0.779);
+    border: 2px solid #770909ef;
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: #fefefe;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s ease;
+  }
+  
+
+  .navLinks .btnNavLink a {
+    color: #fff; 
+    text-decoration: none; 
+  }
+
+  .navLinks .btnNavLink:hover {
+    background-color: #ff0000;
+    color: #fff;
+  }
+
+  #chbox {
+    color: #f5dada; 
+    align-items: center;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+  
+  #chbox:hover {
+    text-decoration: underline;
+    color: #0c38da; 
+  }
+  
+  
+  .campoTerminos {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      gap: 8px; 
+    }
+    
+    .lbTerminos {
+      font-size: 14px;
+      color: #fff; 
+    }
+    
+    .campoTerminos input[type="checkbox"] {
+      width: 14px; 
+      height: 20px;
+      accent-color: #2600ff; 
+      cursor: pointer; 
+    }
+    
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .campoForm {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .lbForm {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px 10px;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    outline: none;
+    transition: 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #ff0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
+  
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #950101;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s ease;
+  }
+  
+  button:hover {
+    background: #ff0000;
+  }
+  
+  .RecuperarPwd {
+    margin-top: 15px;
+        text-align: center;
+  }
+  
+  .RecuperarPwd a {
+    color: #ce1313;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .RecuperarPwd a:hover {
+    text-decoration: underline;
+  }
+  
+  /*Esta es una animacion amor, por si la quieres recrear*/
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+
