@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
             // Consulta SQL directa (sin preparar)
-            $sql = "SELECT * FROM usuarios WHERE correo = '$email'";
+            $sql = "SELECT * FROM usuarios INNER JOIN subscripciones ON correo = '$email' AND subscripciones.id = usuarios.id;"; 
             $result = $conn->query($sql);
 
             // Verificar si la consulta fue exitosa
@@ -40,10 +40,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['apellido'] = $user['apellido'];
                     $_SESSION['correo'] = $user['correo'];
                     $_SESSION['password'] = $user['password'];
+                    $_SESSION['sub'] = $user['sub'];
+                    $_SESSION['estatus'] = intval($user['estatus']);
 
 
 
-                    echo "Bienvenido, ".$_SESSION['nombre'].". ¡Has iniciado sesión exitosamente!";
+                    echo "Bienvenido, ".$_SESSION['nombre'].". ¡Has iniciado sesión exitosamente!".$_SESSION['estatus'] ;
                     echo "<p><button><a href='../Public/index.php'>Inicio</a></button></p></div>";
 
                 } else {

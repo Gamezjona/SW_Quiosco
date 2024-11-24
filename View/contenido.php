@@ -1,5 +1,31 @@
 <?php
+session_start(); // Reanuda la sesión
+$userBool = false;
 
+$adminBool = false;
+
+
+if (isset($_SESSION['id'])) {
+
+    if($_SESSION['correo'] == "root@admin.com"){
+        $adminBool = true;
+        
+    }
+
+    $userBool = true;
+
+} else {
+
+    header("Location: ../Public/index.php");
+    // Si no está autenticado, muestra el alert y redirige o maneja el flujo
+    /* echo "
+    <script src='../Source/JS/script.js'></script>
+    <script>
+        alertaUser(); // Llama a la función alertaUser() definida en script.js
+        //window.location.href = '../View/login.html'; // Redirige después de mostrar la alerta
+    </script>";
+ */
+}
 
 ?>
 
@@ -127,9 +153,10 @@
             </div>
 
             <?php
-            if (/*$userBool*/false) {
+            if (intval($_SESSION['estatus']) == 1) {
 
-                // URL del servicio web
+                if($_SESSION['sub'] == "Free"){
+                                    // URL del servicio web
                 $url = "https://ws-api-gateway-latest.onrender.com/SWContenido/VerTodo";
 
                 // Inicializar cURL
@@ -160,23 +187,35 @@
                     echo '<div class="d-flex justify-content-around flex-wrap mt-5">';
 
                     // Recorrer los elementos del JSON
+                    //foreach ($data as $item)
+                    
+
                     foreach ($data as $item) {
                         echo '<div class="card">
-                    <img src="' . $item['imagen'] . '" class="card-img-top" alt="' . $item['titulo'] . '">
-                    <div class="card-body">
-                        <h5 class="card-title">' . $item['titulo'] . '</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">' . $item['categoria'] . '</h6>
-                        <p class="card-text">' . $item['descripcion'] . '</p>
-                        <a href="' . $item['enlace'] . '" class="btn btn-primary" target="_blank">Ver más</a>
-                    </div>
-                </div>';
+                                <img src="' . $item['imagen'] . '" class="card-img-top" style="width: 18rem;" alt="' . $item['titulo'] . '">
+                                <div class="card-body">
+                                    <h5 class="card-title">' . $item['titulo'] . '</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">' . $item['categoria'] . '</h6>
+                                    <p class="card-text">' . $item['descripcion'] . '</p>
+                                    <a href="' . $item['enlace'] . '" class="btn btn-primary" target="_blank">Ver más</a>
+                                </div>
+                            </div>';
+                            break;
                     }
-
+                    
                     echo '</div>';
+
+
+                    echo "<h1>Si Quieres ver mas contenido debes ser Premium</h1>";
                 } else {
                     echo "No se pudo obtener los datos.";
                 }
+                }
+            }else{
+                echo "<h1>Tu Cuenta a sido suspendida</h1>";
             }
+
+
             ?>
 
         </div>

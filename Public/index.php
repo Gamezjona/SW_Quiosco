@@ -1,7 +1,5 @@
 <?php
 
-require '../Model/clases.php';
-
 session_start(); // Reanuda la sesión
 
 
