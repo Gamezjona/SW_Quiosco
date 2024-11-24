@@ -30,8 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Verificar si la contraseña es correcta
                 if ($pwd === $user['password']) {
-                    echo "Bienvenido, $email. ¡Has iniciado sesión exitosamente!";
-                    echo "<p><button><a href='../Public/index.php'>Iniciar Sesion</a></button></p></div>";
+                    
 
                     session_start();
 
@@ -41,6 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['apellido'] = $user['apellido'];
                     $_SESSION['correo'] = $user['correo'];
                     $_SESSION['password'] = $user['password'];
+
+
+
+                    echo "Bienvenido, ".$_SESSION['nombre'].". ¡Has iniciado sesión exitosamente!";
+                    echo "<p><button><a href='../Public/index.php'>Inicio</a></button></p></div>";
 
                 } else {
                     echo "Contraseña incorrecta para $email.";
