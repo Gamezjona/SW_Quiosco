@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $terminos = isset($_POST['terminos']) ? $_POST['terminos'] : null;
 
         if (empty($nombre) || empty($apellido) || empty($correo) || empty($password) || empty($confirmarPassword)) {
-            echo "Todos los campos son obligatorios.";
+            header("Location: ../View/registro.php?funcion=errorParametros&txtError=Todos los campos son obligatorios.");
         } elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
-            echo "El correo electrónico no es válido.";
+            header("Location: ../View/registro.php?funcion=errorParametros&txtError=El correo electrónico no es válido.");
         } elseif ($password !== $confirmarPassword) {
-            echo "Las contraseñas no coinciden.";
+            header("Location: ../View/registro.php?funcion=errorParametros&txtError=Las contraseñas no coinciden.");
         } elseif (!$terminos) {
-            echo "Debe aceptar los términos y condiciones.";
+            header("Location: ../View/registro.php?funcion=errorParametros&txtError=Debe aceptar los términos y condiciones.");
         } else {
             try {
 
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
                 if ($result->num_rows > 0) {
-                    echo "El usuario ya existe";
+                    header("Location: ../View/registro.php?funcion=errorParametros&txtError=El usuario ya existe");
                     exit();
                 }
 
@@ -92,10 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>";
             } catch (Exception $e) {
                 // Capturar cualquier excepción y mostrar el error
-                echo "<p style='color: red; font-family: Arial, sans-serif;'>Error: " . $e->getMessage() . "</p>";
+                
+                header("Location: ../View/registro.php?funcion=errorParametros&txtError=".$e->getMessage());
             }
         }
     } else {
-        echo "Por favor complete todos los campos.";
+        header("Location: ../View/registro.php?funcion=errorParametros&txtError=Por favor complete todos los campos.");
     }
 }

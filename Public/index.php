@@ -10,21 +10,11 @@ $adminBool = false;
 
 if (isset($_SESSION['id'])) {
 
-    if($_SESSION['correo'] == "root@admin.com"){
+    if ($_SESSION['correo'] == "root@admin.com") {
         $adminBool = true;
     }
-    
-    $userBool = true;
 
-} else {
-    // Si no está autenticado, muestra el alert y redirige o maneja el flujo
-    /* echo "
-    <script src='../Source/JS/script.js'></script>
-    <script>
-        alertaUser(); // Llama a la función alertaUser() definida en script.js
-        //window.location.href = '../View/login.html'; // Redirige después de mostrar la alerta
-    </script>";
- */
+    $userBool = true;
 }
 
 ?>
@@ -37,124 +27,131 @@ if (isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
     <link rel="stylesheet" href="../Source/Css/bootstrap.min.css">
-    <link rel="stylesheet" href="../Source/Css/styleIndex.css">
+    <link rel="stylesheet" href="../Source/Css/index.css">
+
     <script src="../Source/JS/bootstrap.bundle.min.js"></script>
     <script src="../Source/JS/sweetalert2.all.min.js"></script>
-    <script src="../Source/JS/script.js"></script>
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">QUISOCO DIGITAL</a>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse  justify-content-between" id="navbarNav">
+
+                <ul class="navbar-nav">
+
+                    <ol class="nav-item">
+                        <a href="" class="linkNav " aria-current="page">Inicio</a>
+                    </ol>
+                    <ol class="nav-item">
+                        <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
+                    </ol>
+
+                    <?php
+                    if ($adminBool) {
+
+                        echo '<ol class="nav-item">
+    <a href="" class="linkNav">Subcripciones</a>
+    </ol>';
 
 
-    <header>
+                        echo '<ol class="nav-item">
+    <a href="../View/usuarios.php" class="linkNav">Usuarios</a>
+    </ol>';
 
-        <div class="logo">
-            <img src="" alt="" class="logoImg">
-            <p class="logoNombre"></p>
-        </div>
-        <nav class="navLinks">
+                        echo '<ol class="nav-item">
+    <a href="../View/ptcndr.php" class="linkNav">Patrocinadores</a>
+    </ol>';
+                    }
 
-            <ul class="links">
-                <ol class="linkNavItem">
-                    <a href="" class="linkNav">Inicio</a>
-                </ol>
-                <ol class="linkNavItem">
-                    <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
-                </ol>
-                
-                <?php
-                if ($adminBool){
+                    if ($userBool) {
+                        echo '<ol class="nav-item">
+    <a href="../View/contenido.php" class="linkNav">Contenido</a>
+    </ol>';
+                    }
 
-                    echo '<ol class="linkNavItem">
-                    <a href="" class="linkNav">Subcripciones</a>
-                    </ol>';
+                    ?>
+                </ul>
 
 
-                    echo '<ol class="linkNavItem">
-                    <a href="../View/usuarios.php" class="linkNav">Usuarios</a>
-                    </ol>';
-
-                }
-
-                if($userBool){
-                    echo '<ol class="linkNavItem">
-                    <a href="../View/contenido.php" class="linkNav">Contenido</a>
-                    </ol>';
-
-                    echo '<ol class="linkNavItem">
-                    <a href="" class="linkNav">Patrocinadores</a>
-                    </ol>';
-                }
-                
-                ?>
-            </ul>
+                <div class="navbar-nav nav-btns">
+                    <?php
+                    if (!$userBool) {
 
 
-            <div class="btnsNavLinks">
-                <?php
-                if (!$userBool) {
+                        /*  echo '<button class="nav-item">
+    <a class="linkNav" href="../Public/index.php">Regresar</a>
+    </button>'; */
 
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../View/login.html">Iniciar Sesion</a>
+    </button>';
 
-                   /*  echo '<button class="btnNavLink">
-                    <a class="linkNav" href="../Public/index.php">Regresar</a>
-                    </button>'; */
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../View/registro.html">Registrarme</a>
+    </button>';
+                    } else {
 
-                    echo '<button class="btnNavLink">
-                    <a class="nav-link" href="../View/login.html">Iniciar Sesion</a>
-                    </button>';
+                        echo "<button class='nav-item btn-naver'>
+    <a class='nav-link-btn ' href='#'>" . $_SESSION['nombre'] . "</a>
+    </button>";
 
-                    echo '<button class="btnNavLink">
-                    <a class="nav-link" href="../View/registro.html">Registrarme</a>
-                    </button>';
-
-                } else {
-
-                    echo "<button class='linkNavItem'>
-                    <a class='navbar-brand' href='#'>" . $_SESSION['nombre'] . "</a>
-                    </button>";
-
-                    echo '<button class="btnNavLink">
-                    <a class="nav-link" href="../Controller/cerrar_session.php">Cerrar sesion</a>
-                    </button>';
-                }
-                ?>
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../Controller/cerrar_session.php">Cerrar sesion</a>
+    </button>';
+                    }
+                    ?>
+                </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+
+
 
     <!-- Main -->
-    <div class="main d-flex flex-column justify-content-center">
+    <div class="fondo pt-2">
 
-
-        <!--Carrucel-->
-        <div id="carrucelMain" class="carousel slide mt-3">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carrucelMain" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carrucelMain" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carrucelMain" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="../Img/image.png" class="d-block w-100 imgCarrucel" alt="...">
-                </div>
-                <!-- <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                </div> -->
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carrucelMain" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carrucelMain" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+        <div class="planActual">
+            <h1><?php if (isset($_SESSION['sub'])) {
+                    echo "<p>Tu plan actual es: " . $_SESSION['sub'] . "</p>";
+                } else {
+                    echo "<p>Inicia Session</p>";
+                } ?></h1>
         </div>
 
-        <!--Contenido-->
+        <!--Carrucel-->
+        <div class="carrucel mt-lg-3">
+
+            <div id="carrucelMain" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../Img/c1.jpg" class="d-block imgCarrucel" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/c2.jpg" class="d-block imgCarrucel" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/c3.jpg" class="d-block imgCarrucel" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../img/c4.jpg" class="d-block imgCarrucel" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carrucelMain" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carrucelMain" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
 
     </div>
 

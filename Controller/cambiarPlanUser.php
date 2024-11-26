@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id']) && isset($_POST[
     $f = "Free";
     $p = "Premium";
     
+    
     if ($_POST['sub'] == "Free") {
         setSubscriptor($_POST['id'], intval($_POST['estatus']),  $p);
 
@@ -14,6 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id']) && isset($_POST[
         setSubscriptor($_POST['id'], intval($_POST['estatus']), $f);
 
     }
+
+    header("Location: ../View/usuarios.php");
 } else {
     echo "no estan tosdos los campos";
 }

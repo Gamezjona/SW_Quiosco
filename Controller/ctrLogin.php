@@ -5,6 +5,7 @@ require '../Model/clases.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verificar si los datos existen en el formulario
     if (isset($_POST['correo']) && isset($_POST['password'])) {
+
         $email = $_POST['correo'];
         $pwd = $_POST['password'];
 
@@ -45,8 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-                    echo "Bienvenido, ".$_SESSION['nombre'].". ¡Has iniciado sesión exitosamente!".$_SESSION['estatus'] ;
-                    echo "<p><button><a href='../Public/index.php'>Inicio</a></button></p></div>";
+                    /* echo "Bienvenido, ".$_SESSION['nombre'].". ¡Has iniciado sesión exitosamente!" ;
+                    echo "<p><button><a href='../Public/index.php'>Inicio</a></button></p></div>"; */
+
+                    header("Location: ../Public/index.php");
 
                 } else {
                     echo "Contraseña incorrecta para $email.";

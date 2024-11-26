@@ -5,127 +5,124 @@ $userBool = false;
 $adminBool = false;
 
 
+include '../API/gateway.php';
+
 if (isset($_SESSION['id'])) {
 
-    if($_SESSION['correo'] == "root@admin.com"){
+    if ($_SESSION['correo'] == "root@admin.com") {
         $adminBool = true;
-        
     }
-
     $userBool = true;
 
+    $data = verTodoContenido();
 } else {
 
     header("Location: ../Public/index.php");
-    // Si no está autenticado, muestra el alert y redirige o maneja el flujo
-    /* echo "
-    <script src='../Source/JS/script.js'></script>
-    <script>
-        alertaUser(); // Llama a la función alertaUser() definida en script.js
-        //window.location.href = '../View/login.html'; // Redirige después de mostrar la alerta
-    </script>";
- */
 }
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contenido</title>
     <link rel="stylesheet" href="../Source/Css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Source/Css/index.css">
+    <script src="../Source/JS/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">QUISOCO DIGITAL</a>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <header>
+            <div class="collapse navbar-collapse  justify-content-between" id="navbarNav">
 
-        <div class="logo">
-            <img src="" alt="" class="logoImg">
-            <p class="logoNombre"></p>
-        </div>
-        <nav class="navLinks">
+                <ul class="navbar-nav">
 
-            <ul class="links">
-                <ol class="linkNavItem">
-                    <a href="" class="linkNav">Inicio</a>
-                </ol>
-                <ol class="linkNavItem">
-                    <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
-                </ol>
+                    <ol class="nav-item">
+                        <a href="../Public/index.php" class="linkNav " aria-current="page">Inicio</a>
+                    </ol>
+                    <ol class="nav-item">
+                        <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
+                    </ol>
 
-                <?php
-                if ($adminBool) {
+                    <?php
+                    if ($adminBool) {
+                        echo '<ol class="nav-item">
+    <a href="../View/usuarios.php" class="linkNav">Usuarios</a>
+    </ol>';
 
-                    echo '<ol class="linkNavItem">
-            <a href="" class="linkNav">Subcripciones</a>
-            </ol>';
+                        echo '<ol class="nav-item">
+    <a href="../View/ptcndr.php" class="linkNav">Patrocinadores</a>
+    </ol>';
+                    }
 
+                    if ($userBool) {
+                        echo '<ol class="nav-item">
+    <a href="../View/contenido.php" class="linkNav">Contenido</a>
+    </ol>';
+                    }
 
-                    echo '<ol class="linkNavItem">
-            <a href="../View/usuarios.php" class="linkNav">Usuarios</a>
-            </ol>';
-                }
-
-                if ($userBool) {
-                    echo '<ol class="linkNavItem">
-            <a href="../View/contenido.php" class="linkNav">Contenido</a>
-            </ol>';
-
-                    echo '<ol class="linkNavItem">
-            <a href="" class="linkNav">Patrocinadores</a>
-            </ol>';
-                }
-
-                ?>
-            </ul>
+                    ?>
+                </ul>
 
 
-            <div class="btnsNavLinks">
+                <div class="navbar-nav nav-btns">
+                    <?php
+                    if (!$userBool) {
 
 
-                <button class="btnNavLink" onclick="window.location.href='../Public/index.php'">
-                    Regresar
-                </button>
+                        /*  echo '<button class="nav-item">
+    <a class="linkNav" href="../Public/index.php">Regresar</a>
+    </button>'; */
 
-                <?php
-                if (!$userBool) {
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../View/login.html">Iniciar Sesion</a>
+    </button>';
 
-                    echo '<button class="btnNavLink">
-            <a class="nav-link" href="../View/login.html">Iniciar Sesion</a>
-            </button>';
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../View/registro.html">Registrarme</a>
+    </button>';
+                    } else {
 
-                    echo '<button class="btnNavLink">
-            <a class="nav-link" href="../View/registro.html">Registrarme</a>
-            </button>';
-                } else {
+                        echo "<button class='nav-item btn-naver'>
+    <a class='nav-link-btn ' href='#'>" . $_SESSION['nombre'] . "</a>
+    </button>";
 
-                    echo "<button class='linkNavItem'>
-            <a class='navbar-brand' href='#'>" . $_SESSION['nombre'] . "</a>
-            </button>";
-
-                    echo '<button class="btnNavLink">
-            <a class="nav-link" href="../Controller/cerrar_session.php">Cerrar sesion</a>
-            </button>';
-                }
-                ?>
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../Controller/cerrar_session.php">Cerrar sesion</a>
+    </button>';
+                    }
+                    ?>
+                </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+
+
 
     <section class="intro">
         <div class="introInfo">
             <p class="pInfo">
                 En este apartado encontraras todo sobre nuestro contenido.
             </p>
-            <p class="pInfoFoodee">
-                Disfruta mejor la experiencia pagando uno de nuestros planes <a href="" class="linkIntroInfo">PLANES</a>
-            </p>
+
+            <?php
+
+            if ($_SESSION['sub'] == "Free") {
+                echo '<p class="pInfoFoodee">
+                Disfruta mejor la experiencia pagando uno de nuestros planes <a href="planes.php" class="linkIntroInfo">PLANES</a>
+            </p>';
+            }
+            ?>
+
         </div>
         <div class="introCarrucel">
             Aqui ira un carrucel
@@ -140,78 +137,69 @@ if (isset($_SESSION['id'])) {
             </p>
         </div>
 
+        <?php if ($adminBool) { ?>
+
+            <h1>Agregar Nuevo Contenido</h1>
+            <form action="../Controller/nuevoContenido.php" method="post" enctype="multipart/form-data">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required><br><br>
+
+                <label for="categoria">Categoría:</label>
+                <input type="text" id="categoria" name="categoria" required><br><br>
+
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" required></textarea><br><br>
+
+                <label for="imagen">Imagen Url:</label>
+                <input type="url" id="imagen" name="imagen" required><br><br>
+
+                <label for="enlace">Enlace:</label>
+                <input type="url" id="enlace" name="enlace" required><br><br>
+
+                <button type="submit">Enviar</button>
+            </form>
+
+        <?php } ?>
+
         <div class="contenidoFull">
-
-
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
 
             <?php
             if (intval($_SESSION['estatus']) == 1) {
 
-                if($_SESSION['sub'] == "Free"){
-                                    // URL del servicio web
-                $url = "https://ws-api-gateway-latest.onrender.com/SWContenido/VerTodo";
 
-                // Inicializar cURL
-                $ch = curl_init();
-
-                // Configurar opciones de cURL
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-
-                // Ejecutar la solicitud y obtener la respuesta
-                $response = curl_exec($ch);
-
-                // Verificar si hubo errores
-                if (curl_errno($ch)) {
-                    echo 'Error de cURL: ' . curl_error($ch);
-                    exit;
-                }
-
-                // Cerrar la sesión de cURL
-                curl_close($ch);
-
-                // Decodificar el JSON recibido
-                $data = json_decode($response, true);
-
+                
                 // Verificar si los datos se han decodificado correctamente
                 if ($data) {
                     echo '<div class="d-flex justify-content-around flex-wrap mt-5">';
 
                     // Recorrer los elementos del JSON
                     //foreach ($data as $item)
-                    
-
                     foreach ($data as $item) {
+                        if($adminBool){$eliminar = '<a href="../Controller/eliminarContenido.php?id='.$item['id'].'" class="btn btn-danger">Borrar</a>';}else{$eliminar = "";};
                         echo '<div class="card">
                                 <img src="' . $item['imagen'] . '" class="card-img-top" style="width: 18rem;" alt="' . $item['titulo'] . '">
                                 <div class="card-body">
-                                    <h5 class="card-title">' . $item['titulo'] . '</h5>
+                                '.$eliminar.'
+                                <h5 class="card-title">' . $item['titulo'] . '</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">' . $item['categoria'] . '</h6>
                                     <p class="card-text">' . $item['descripcion'] . '</p>
                                     <a href="' . $item['enlace'] . '" class="btn btn-primary" target="_blank">Ver más</a>
                                 </div>
                             </div>';
+
+                        if ($_SESSION['sub'] == "Free") {
                             break;
+                        }
                     }
-                    
+
                     echo '</div>';
-
-
-                    echo "<h1>Si Quieres ver mas contenido debes ser Premium</h1>";
+                    if ($_SESSION['sub'] == "Free") {
+                        echo "<h1>Si Quieres ver mas contenido debes ser Premium</h1>";
+                    }
                 } else {
                     echo "No se pudo obtener los datos.";
                 }
-                }
-            }else{
+            } else {
                 echo "<h1>Tu Cuenta a sido suspendida</h1>";
             }
 

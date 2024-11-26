@@ -10,6 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['id']) && isset($_POST[
     } else {
         setSubscriptor($_POST['id'], 0, $_POST['sub']);
     }
+
+    header("Location: ../View/usuarios.php");
 } else {
     echo "no estan tosdos los campos";
 }

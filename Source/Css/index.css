@@ -1,0 +1,150 @@
+/* Estilo general para el header */
+
+
+body{
+    padding: 0;
+    margin: 0;
+    height: 91.5vh; /* Ocupa toda la altura de la pantalla */
+}
+
+.fondo {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(61, 0, 0, 1) 19%, rgba(255, 0, 0, 1) 100%);
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.linkNav {
+    text-decoration: none;
+    color: #FF0000;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.linkNav:hover {
+    background-color: #ff0000;
+    /* Rojo oscuro para el hover */
+    color: #FFFFFF;
+    /* Blanco para contraste */
+    border-radius: 5px;
+}
+
+/* Links dentro de los botones */
+.nav-link-btn {
+    text-decoration: none;
+    color: #FF0000;
+    font-weight: bold;
+    /* Blanco para texto */
+}
+
+.nav-link-btn:hover {
+    text-decoration: underline;
+}
+
+.btn-naver{
+    margin-right: 15px;
+}
+
+
+.planActual {
+    width: 100%;
+    color: #FFFFFF;
+}
+
+.planActual p{
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+/* Contenedor principal del carrusel */
+.carrucel {
+    display: flex; /* Usamos flexbox para centrar */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 70vh; /* Ocupa toda la altura de la pantalla */
+    /* Espaciado alrededor */
+}
+
+/* Estilo para el carrusel */
+#carrucelMain {
+    max-width: 90%; /* Ancho máximo del carrusel */
+    max-height: 100%; /* Altura máxima del carrusel */
+    border-radius: 15px; /* Bordes redondeados */
+    overflow: hidden; /* Oculta contenido fuera del contenedor */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Sombra para darle estilo */
+}
+
+/* Imágenes del carrusel */
+.imgCarrucel {
+    width: 100%; /* Ajusta al ancho del carrusel */
+    height: auto; /* Mantiene las proporciones */
+    object-fit: cover; /* Ajusta la imagen al contenedor sin deformarla */
+    border-radius: 15px; /* Coincide con los bordes del carrusel */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* Cambia el color al pasar el mouse */
+}
+
+
+
+/* Estilos responsivos */
+@media screen and (max-width: 990px) {
+
+    .nav-btns{
+        margin-top: 1rem;
+        align-items: center;
+    }
+
+    .btn-naver{
+        margin-bottom: 5px;
+        width: 80%;
+    }
+
+   /*  ¿¿header {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .logoNombre {
+        font-size: 1.5rem;
+    }
+
+    .links {
+        flex-direction: column;
+        gap: 10px;
+        margin: 10px 0;
+    }
+
+    .linkNavItem {
+        font-size: 1rem;
+    }
+
+    
+
+    .btnNavLink {
+        margin-left: 0;
+        font-size: 0.9em;
+        width: 100%;
+    }
+
+    .carrucel {
+        height: 30vh;
+    }
+
+    #carrucelMain {
+        max-width: 90%;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 30px;
+        height: 30px;
+    } */
+}
+

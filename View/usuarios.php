@@ -8,7 +8,7 @@ $adminBool = false;
 
 if (isset($_SESSION['id'])) {
 
-    if($_SESSION['correo'] == "root@admin.com"){
+    if ($_SESSION['correo'] == "root@admin.com") {
         $adminBool = true;
         $userBool = true;
 
@@ -18,16 +18,15 @@ if (isset($_SESSION['id'])) {
         if ($conn->connect_error) {
             die("Error en la conexión: " . $conn->connect_error);
         }
-        
+
         // Consulta para obtener los datos
         $sql = "SELECT subscripciones.id, usuarios.nombre, usuarios.correo, subscripciones.sub, subscripciones.estatus
         FROM subscripciones
         INNER JOIN usuarios ON subscripciones.id = usuarios.id;"; // Cambia "mi_tabla" a tu tabla
         $result = $conn->query($sql);
-    }else{
+    } else {
         header("Location: ../Public/index.php");
     }
-
 } else {
 
     header("Location: ../Public/index.php");
@@ -49,10 +48,15 @@ if (isset($_SESSION['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grid con Botones</title>
+    <link rel="stylesheet" href="../Source/Css/bootstrap.min.css">
+    <link rel="stylesheet" href="../Source/Css/index.css">
+    <script src="../Source/JS/bootstrap.bundle.min.js"></script>
+
     <style>
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: 80%;
+            margin: 0 auto 0;
         }
 
         th,
@@ -68,7 +72,6 @@ if (isset($_SESSION['id'])) {
 
         button {
             padding: 5px 10px;
-            background-color: #007BFF;
             color: white;
             border: none;
             border-radius: 3px;
@@ -83,79 +86,79 @@ if (isset($_SESSION['id'])) {
 
 <body>
 
-    <header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">QUISOCO DIGITAL</a>
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="logo">
-            <img src="" alt="" class="logoImg">
-            <p class="logoNombre"></p>
-        </div>
-        <nav class="navLinks">
+            <div class="collapse navbar-collapse  justify-content-between" id="navbarNav">
 
-            <ul class="links">
-                <ol class="linkNavItem">
-                    <a href="" class="linkNav">Inicio</a>
-                </ol>
-                <ol class="linkNavItem">
-                    <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
-                </ol>
+                <ul class="navbar-nav">
 
-                <?php
-                if ($adminBool) {
+                    <ol class="nav-item">
+                        <a href="../Public/index.php" class="linkNav " aria-current="page">Inicio</a>
+                    </ol>
+                    <ol class="nav-item">
+                        <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
+                    </ol>
 
-                    echo '<ol class="linkNavItem">
-            <a href="" class="linkNav">Subcripciones</a>
-            </ol>';
+                    <?php
+                    if ($adminBool) {
 
+                        echo '<ol class="nav-item">
+    <a href="../View/usuarios.php" class="linkNav">Usuarios</a>
+    </ol>';
 
-                    echo '<ol class="linkNavItem">
-            <a href="../View/usuarios.php" class="linkNav">Usuarios</a>
-            </ol>';
-                }
+                        echo '<ol class="nav-item">
+    <a href="../View/ptcndr.php" class="linkNav">Patrocinadores</a>
+    </ol>';
+                    }
 
-                if ($userBool) {
-                    echo '<ol class="linkNavItem">
-            <a href="../View/contenido.php" class="linkNav">Contenido</a>
-            </ol>';
+                    if ($userBool) {
+                        echo '<ol class="nav-item">
+    <a href="../View/contenido.php" class="linkNav">Contenido</a>
+    </ol>';
+                    }
 
-                    echo '<ol class="linkNavItem">
-            <a href="" class="linkNav">Patrocinadores</a>
-            </ol>';
-                }
-
-                ?>
-            </ul>
+                    ?>
+                </ul>
 
 
-            <div class="btnsNavLinks">
-                <?php
-                if (!$userBool) {
+                <div class="navbar-nav nav-btns">
+                    <?php
+                    if (!$userBool) {
 
 
-                    /*  echo '<button class="btnNavLink">
-            <a class="linkNav" href="../Public/index.php">Regresar</a>
-            </button>'; */
+                        /*  echo '<button class="nav-item">
+    <a class="linkNav" href="../Public/index.php">Regresar</a>
+    </button>'; */
 
-                    echo '<button class="btnNavLink">
-            <a class="nav-link" href="../View/login.html">Iniciar Sesion</a>
-            </button>';
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../View/login.html">Iniciar Sesion</a>
+    </button>';
 
-                    echo '<button class="btnNavLink">
-            <a class="nav-link" href="../View/registro.html">Registrarme</a>
-            </button>';
-                } else {
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../View/registro.html">Registrarme</a>
+    </button>';
+                    } else {
 
-                    echo "<button class='linkNavItem'>
-            <a class='navbar-brand' href='#'>" . $_SESSION['nombre'] . "</a>
-            </button>";
+                        echo "<button class='nav-item btn-naver'>
+    <a class='nav-link-btn ' href='#'>" . $_SESSION['nombre'] . "</a>
+    </button>";
 
-                    echo '<button class="btnNavLink">
-            <a class="nav-link" href="../Controller/cerrar_session.php">Cerrar sesion</a>
-            </button>';
-                }
-                ?>
+                        echo '<button class="nav-item btn-naver">
+    <a class="nav-link-btn " href="../Controller/cerrar_session.php">Cerrar sesion</a>
+    </button>';
+                    }
+                    ?>
+                </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
+
+
 
     <h1>Lista de Datos</h1>
     <table>
@@ -172,6 +175,9 @@ if (isset($_SESSION['id'])) {
         <tbody>
             <?php if ($result->num_rows > 0): ?>
                 <?php while ($row = $result->fetch_assoc()): ?>
+                    <?php if ($row['correo'] == "root@admin.com") {
+                        continue;
+                    }; ?>
                     <tr>
                         <td><?php echo $row['id']; ?></td>
                         <td><?php echo $row['nombre']; ?></td>
@@ -189,19 +195,19 @@ if (isset($_SESSION['id'])) {
                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                 <input type="hidden" name="estatus" value="<?php echo $row['estatus']; ?>">
                                 <input type="hidden" name="sub" value="<?php echo $row['sub']; ?>">
-                                <button type="submit">Cambiar Estatus</button>
+                                <button type="submit" class="btn btn-info">Cambiar Estatus</button>
                             </form>
 
                             <form action="../Controller/cambiarPlanUser.php" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                 <input type="hidden" name="estatus" value="<?php echo $row['estatus']; ?>">
                                 <input type="hidden" name="sub" value="<?php echo $row['sub']; ?>">
-                                <button type="submit">Cambiar Plan</button>
+                                <button type="submit" class="btn btn-info">Cambiar Plan</button>
                             </form>
 
-                            <form action="eliminarUser.php" method="post" style="display:inline;">
+                            <form action="../Controller/eliminarUser.php" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                <button type="submit">Eliminar</button> 
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
                             </form>
 
                         </td>

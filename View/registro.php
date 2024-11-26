@@ -1,3 +1,23 @@
+<?php
+
+
+include '../Model/clases.php';
+
+$alertaBool = false;
+
+if(isset($_GET['funcion']) && isset($_GET['txtError'])){
+    $fn = $_GET['funcion'];
+    $error = $_GET['txtError'];
+    $alerta = new Alerta($fn);
+
+    $alertaBool = true;
+    
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,9 +26,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link rel="stylesheet" href="../Source/Css/style_registro.css">
+    <script src="../Source/JS/sweetalert2.all.min.js"></script>
 </head>
 
 <body class="bodyRegistro">
+    <?php 
+    if($alertaBool){
+        $alerta->mostrarAlerta($error);
+    }
+    
+    ?>
 
     <header>
         <div class="logo">
@@ -64,11 +91,6 @@
         <div class="campoBtns">
             <label for="" class="lbBtns">
                 <input type="submit" value="Enviar" class="btnEnviar" required>
-            </label>
-        </div>
-        <div class="RecuperarPwd">
-            <label for="" class="RecuperarPwd">
-                <a href="#" class="linkRcpPwd">Ya tengo una cuenta</a>
             </label>
         </div>
     </form>
