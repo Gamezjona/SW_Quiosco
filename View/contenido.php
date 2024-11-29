@@ -24,20 +24,22 @@ if (isset($_SESSION['id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contenido</title>
     <link rel="stylesheet" href="../Source/Css/bootstrap.min.css">
-    <link rel="stylesheet" href="../Source/Css/index.css">
+    <link rel="stylesheet" href="../Source/Css/styleContenido.css">
     <script src="../Source/JS/bootstrap.bundle.min.js"></script>
 
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg">
+
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-        <a class="navbar-brand" href="#">QUISOCO DIGITAL</a>
+            <a class="navbar-brand" href="#">QUISOCO DIGITAL</a>
             <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -106,10 +108,10 @@ if (isset($_SESSION['id'])) {
         </div>
     </nav>
 
+    <div class="pt-4 align-items-center flex-wrap fondo">
 
+        <section class="container Info">
 
-    <section class="intro">
-        <div class="introInfo">
             <p class="pInfo">
                 En este apartado encontraras todo sobre nuestro contenido.
             </p>
@@ -123,92 +125,93 @@ if (isset($_SESSION['id'])) {
             }
             ?>
 
-        </div>
-        <div class="introCarrucel">
-            Aqui ira un carrucel
-        </div>
-    </section>
 
-    <section class="contenido">
+        </section>
 
-        <div clases="introContenido">
-            <p class="pIntroContenido">
-                Es lo mejor de lo mejor
-            </p>
-        </div>
+        <section class="contenido">
 
-        <?php if ($adminBool) { ?>
+            <div clases="introContenido">
+                <p class="pIntroContenido">
+                    Lo mas nuevo del mes
+                </p>
+            </div>
 
-            <h1>Agregar Nuevo Contenido</h1>
-            <form action="../Controller/nuevoContenido.php" method="post" enctype="multipart/form-data">
-                <label for="titulo">Título:</label>
-                <input type="text" id="titulo" name="titulo" required><br><br>
+            <?php if ($adminBool) { ?>
 
-                <label for="categoria">Categoría:</label>
-                <input type="text" id="categoria" name="categoria" required><br><br>
+                <h1>Agregar Nuevo Contenido</h1>
+                <form action="../Controller/nuevoContenido.php" method="post" enctype="multipart/form-data">
+                    <label for="titulo">Título:</label>
+                    <input type="text" id="titulo" name="titulo" required><br><br>
 
-                <label for="descripcion">Descripción:</label>
-                <textarea id="descripcion" name="descripcion" required></textarea><br><br>
+                    <label for="categoria">Categoría:</label>
+                    <input type="text" id="categoria" name="categoria" required><br><br>
 
-                <label for="imagen">Imagen Url:</label>
-                <input type="url" id="imagen" name="imagen" required><br><br>
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" required></textarea><br><br>
 
-                <label for="enlace">Enlace:</label>
-                <input type="url" id="enlace" name="enlace" required><br><br>
+                    <label for="imagen">Imagen Url:</label>
+                    <input type="url" id="imagen" name="imagen" required><br><br>
 
-                <button type="submit">Enviar</button>
-            </form>
+                    <label for="enlace">Enlace:</label>
+                    <input type="url" id="enlace" name="enlace" required><br><br>
 
-        <?php } ?>
+                    <button type="submit">Enviar</button>
+                </form>
 
-        <div class="contenidoFull">
+            <?php } ?>
 
-            <?php
-            if (intval($_SESSION['estatus']) == 1) {
+            <div class="d-flex cartas mt-3">
 
-
-                
-                // Verificar si los datos se han decodificado correctamente
-                if ($data) {
-                    echo '<div class="d-flex justify-content-around flex-wrap mt-5">';
-
-                    // Recorrer los elementos del JSON
-                    //foreach ($data as $item)
-                    foreach ($data as $item) {
-                        if($adminBool){$eliminar = '<a href="../Controller/eliminarContenido.php?id='.$item['id'].'" class="btn btn-danger">Borrar</a>';}else{$eliminar = "";};
-                        echo '<div class="card">
-                                <img src="' . $item['imagen'] . '" class="card-img-top" style="width: 18rem;" alt="' . $item['titulo'] . '">
+                <?php
+                if (intval($_SESSION['estatus']) == 1) {
+                    // Verificar si los datos se han decodificado correctamente
+                    if ($data) {
+                        // Recorrer los elementos del JSON
+                        //foreach ($data as $item)
+                        foreach ($data as $item) {
+                            echo '<div class="carta">';
+                            if ($adminBool) {
+                                $eliminar = '<a href="../Controller/eliminarContenido.php?id=' . $item['id'] . '" class="btn btn-danger">Borrar</a>';
+                            } else {
+                                $eliminar = "";
+                            };
+                            echo '<div class="card">
+                                <img src="' . $item['imagen'] . '" class="card-img-top" style="width: 12rem;" alt="' . $item['titulo'] . '">
                                 <div class="card-body">
-                                '.$eliminar.'
+                                ' . $eliminar . '
                                 <h5 class="card-title">' . $item['titulo'] . '</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">' . $item['categoria'] . '</h6>
+                                    <h6 class="card-subtitle mb-1 text-muted">' . $item['categoria'] . '</h6>
                                     <p class="card-text">' . $item['descripcion'] . '</p>
                                     <a href="' . $item['enlace'] . '" class="btn btn-primary" target="_blank">Ver más</a>
                                 </div>
                             </div>';
 
-                        if ($_SESSION['sub'] == "Free") {
-                            break;
+                            if ($_SESSION['sub'] == "Free") {
+                                break;
+                            }
+                            echo '</div>';
                         }
-                    }
 
-                    echo '</div>';
-                    if ($_SESSION['sub'] == "Free") {
-                        echo "<h1>Si Quieres ver mas contenido debes ser Premium</h1>";
+
+                        if ($_SESSION['sub'] == "Free") {
+                            echo "<h1>Si Quieres ver mas contenido debes ser Premium</h1>";
+                        }
+                    } else {
+                        echo "No se pudo obtener los datos.";
                     }
                 } else {
-                    echo "No se pudo obtener los datos.";
+                    echo "<h1>Tu Cuenta a sido suspendida</h1>";
                 }
-            } else {
-                echo "<h1>Tu Cuenta a sido suspendida</h1>";
-            }
 
 
-            ?>
+                ?>
 
-        </div>
+            </div>
 
-    </section>
+        </section>
+    </div>
+
+
 
 
 </body>
