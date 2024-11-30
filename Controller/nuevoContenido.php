@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imgUrl = $_POST['imagen'];
 
     nuevoContenido($titulo,$categoria,$descripcion,$enlace,$imgUrl);
-
     header("Location: ../View/contenido.php");
 
 }

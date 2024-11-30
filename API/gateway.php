@@ -71,7 +71,7 @@ function nuevoContenido($titulo, $categoria, $descripcion, $enlace, $imgUrl)
     curl_close($ch);
 
     // Mostrar la respuesta del servidor
-    //echo "Respuesta del servidor: " . $response;
+    echo "Respuesta del servidor: " . $response;
 }
 
 function eliminarContenido($id)
