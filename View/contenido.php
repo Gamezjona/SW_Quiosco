@@ -90,7 +90,7 @@ if (isset($_SESSION['id'])) {
     </button>';
 
                         echo '<button class="nav-item btn-naver">
-    <a class="nav-link-btn " href="../View/registro.html">Registrarme</a>
+    <a class="nav-link-btn " href="../View/registro.php">Registrarme</a>
     </button>';
                     } else {
 
@@ -108,7 +108,7 @@ if (isset($_SESSION['id'])) {
         </div>
     </nav>
 
-    <div class="pt-4 align-items-center flex-wrap fondo">
+    <div class="py-4 align-items-center flex-wrap fondo">
 
         <section class="container Info">
 
@@ -201,13 +201,13 @@ if (isset($_SESSION['id'])) {
                             }
 
                             if ($_SESSION['sub'] == "Free") {
-                                echo '<h1 class="text-center">Si quieres ver más contenido, debes ser Premium</h1>';
+                                echo '<h1 class="text-center text-bg-secondary p-3">Si quieres ver más contenido, debes ser Premium</h1>';
                             }
                         } else {
-                            echo '<h1 class="text-center">No se pudo obtener los datos.</h1>';
+                            echo '<h1 class="text-center text-bg-danger p-3">No se pudo obtener los datos.</h1>';
                         }
                     } else {
-                        echo '<h1 class="text-center">Tu cuenta ha sido suspendida.</h1>';
+                        echo '<h1 class="text-center text-bg-warning p-3">Tu cuenta ha sido suspendida.</h1>';
                     }
                     ?>
                 </div>
@@ -217,7 +217,12 @@ if (isset($_SESSION['id'])) {
         </section>
     </div>
 
-
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2024 Tu Empresa. Todos los derechos reservados.</p>
+            <p><a href="#" class="text-white">Política de privacidad</a> | <a href="#" class="text-white">Términos y condiciones</a></p>
+        </div>
+    </footer>
 
 
 </body>

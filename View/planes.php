@@ -36,7 +36,7 @@ if (isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../Source/Css/bootstrap.min.css">
     <script src="../Source/JS/sweetalert2.all.min.js"></script>
     <script src="../Source/JS/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../Source/Css/index.css">
+    <link rel="stylesheet" href="../Source/Css/StylePlan.css">
 
 
 </head>
@@ -97,7 +97,7 @@ if (isset($_SESSION['id'])) {
     </button>';
 
                         echo '<button class="nav-item btn-naver">
-    <a class="nav-link-btn " href="../View/registro.html">Registrarme</a>
+    <a class="nav-link-btn " href="../View/registro.php">Registrarme</a>
     </button>';
                     } else {
 
@@ -115,106 +115,109 @@ if (isset($_SESSION['id'])) {
         </div>
     </nav>
 
+    <section class="planes py-5 fondoPlan">
+        <?php if (!isset($_SESSION['id'])) { ?>
+            <div class="alert alert-warning text-center" role="alert">
+                Necesitas iniciar sesión para contratar un plan.
+            </div>
+        <?php } else { ?>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+                    <!-- Plan Premium -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src="https://th.bing.com/th/id/OIP.I-L3AjNCIwmFum7MMkOcPAHaHa?rs=1&pid=ImgDetMain"
+                                class="card-img-top img-fluid"
+                                alt="Plan Premium"
+                                style="object-fit: cover; height: 200px;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Premium</h5>
+                                <p class="card-text">Suscríbete con este plan y podrás ver todo nuestro contenido disponible.</p>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contratarPlanModal"
+                                    <?php if (isset($_SESSION['sub']) && $_SESSION['correo'] !== "root@admin.com" && $_SESSION['sub'] === "Premium") {
+                                        echo 'disabled aria-disabled="true"';
+                                    } ?>>
+                                    Contratar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
-    <?php
-
-    if (!isset($_SESSION['id'])) {
-        echo '<div class="aviso">Nesecitas iniciar sesion para contratar plan</div>';
-    }
-
-
-    ?>
-
-    <section class="planes">
-
-        <div class="plan">
-
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Premium</h5>
-                    <p class="card-text">Suscribete con este plan y podras ver todo nuestro contenido disponible.</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contratarPlanModal" <?php if (isset($_SESSION['sub'])) {
-                                                                                                                                    if ($_SESSION['sub'] == "Premium") {
-                                                                                                                                        echo 'disabled aria-disabled="true"';
-                                                                                                                                    }
-                                                                                                                                } else {
-                                                                                                                                    echo 'disabled aria-disabled="true"';
-                                                                                                                                } ?>>
-                        Contratar
-                    </button>
+                    <!-- Plan Free -->
+                    <div class="col">
+                        <div class="card shadow-sm">
+                            <img src="https://th.bing.com/th/id/OIP.ta3k2VChGjj3vVIMNYeV0wHaEK?rs=1&pid=ImgDetMain"
+                                class="card-img-top img-fluid"
+                                alt="Plan Free"
+                                style="object-fit: cover; height: 200px;">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Free</h5>
+                                <p class="card-text">Con este plan solo podrás visualizar un elemento del contenido.</p>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contratarPlanFreeModal"
+                                    <?php if (isset($_SESSION['sub']) && $_SESSION['correo'] !== "root@admin.com" && $_SESSION['sub'] === "Free") {
+                                        echo 'disabled aria-disabled="true"';
+                                    } ?>>
+                                    Contratar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Free</h5>
-                    <p class="card-text">Solo podras visualizar solo un elemento del contenido</p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contratarPlanFreeModal" <?php if (isset($_SESSION['sub'])) {
-                                                                                                                                        if ($_SESSION['sub'] == "Free") {
-                                                                                                                                            echo 'disabled aria-disabled="true"';
-                                                                                                                                        }
-                                                                                                                                    } else {
-                                                                                                                                        echo 'disabled aria-disabled="true"';
-                                                                                                                                    } ?>>
-                        Contratar
-                    </button>
-                </div>
-            </div>
-
-
-            <!-- Modal -->
+            <!-- Modal Plan Premium -->
             <div class="modal fade" id="contratarPlanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">CONTRATAR PLAN PREMIUM</h1>
+                            <h5 class="modal-title" id="exampleModalLabel">Contratar Plan Premium</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            ¿ESTAS SEGURO DE CONTRATAR NUESTRO PLAN?
+                        <div class="modal-body text-center">
+                            ¿Estás seguro de contratar nuestro plan Premium?
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <a href="../Controller/contratarPlan.php?contrato=Premium&id=<?php echo $_SESSION['id']; ?>&estatus=<?php echo intval($_SESSION['estatus']); ?>&sub=<?php echo $_SESSION['sub']; ?>"
-                                class="btn btn-success">Contratar Plan</a>
+                                class="btn btn-success">
+                                Contratar Plan
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
 
-
-            <!-- Modal -->
+            <!-- Modal Plan Free -->
             <div class="modal fade" id="contratarPlanFreeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">CONTRATAR PLAN FREE</h1>
+                            <h5 class="modal-title" id="exampleModalLabel">Contratar Plan Free</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            ¿ESTAS SEGURO DE CONTRATAR NUESTRO PLAN?
+                        <div class="modal-body text-center">
+                            ¿Estás seguro de contratar nuestro plan Free?
                         </div>
-                        <div class="modal-footer">
+                        <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <a href="../Controller/contratarPlan.php?contrato=Free&id=<?php echo $_SESSION['id']; ?>&estatus=<?php echo intval($_SESSION['estatus']); ?>&sub=<?php echo $_SESSION['sub']; ?>"
-                                class="btn btn-success">Contratar Plan</a>
+                                class="btn btn-success">
+                                Contratar Plan
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-        </div>
-        <div class="plan">
-
-        </div>
+        <?php } ?>
     </section>
 
-    <script>
-    </script>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2024 Tu Empresa. Todos los derechos reservados.</p>
+            <p><a href="#" class="text-white">Política de privacidad</a> | <a href="#" class="text-white">Términos y condiciones</a></p>
+        </div>
+    </footer>
 </body>
 
 </html>

@@ -51,37 +51,6 @@ if (isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../Source/Css/bootstrap.min.css">
     <link rel="stylesheet" href="../Source/Css/index.css">
     <script src="../Source/JS/bootstrap.bundle.min.js"></script>
-
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 80%;
-            margin: 0 auto 0;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f4f4f4;
-            text-align: left;
-        }
-
-        button {
-            padding: 5px 10px;
-            color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 
 <body>
@@ -160,66 +129,76 @@ if (isset($_SESSION['id'])) {
 
 
 
-    <h1>Lista de Datos</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Subcripcion</th>
-                <th>Estatus</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if ($result->num_rows > 0): ?>
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <?php if ($row['correo'] == "root@admin.com") {
-                        continue;
-                    }; ?>
+    <div class="fondo py-5">
+        <h1 class="text-center text-white mb-4">Lista de Usuarios</h1>
+        <div class="table-responsive container">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark text-center">
                     <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['nombre']; ?></td>
-                        <td><?php echo $row['correo']; ?></td>
-                        <td><?php echo $row['sub']; ?></td>
-                        <td>
-                            <?php if ($row['estatus'] == 1) {
-                                echo "<span style='color: green;'>Activo</span>";
-                            } else {
-                                echo "<span style='color: red;'>Suspendido</span>";
-                            } ?>
-                        </td>
-                        <td>
-                            <form action="../Controller/cambiarEstatusUser.php" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                <input type="hidden" name="estatus" value="<?php echo $row['estatus']; ?>">
-                                <input type="hidden" name="sub" value="<?php echo $row['sub']; ?>">
-                                <button type="submit" class="btn btn-info">Cambiar Estatus</button>
-                            </form>
-
-                            <form action="../Controller/cambiarPlanUser.php" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                <input type="hidden" name="estatus" value="<?php echo $row['estatus']; ?>">
-                                <input type="hidden" name="sub" value="<?php echo $row['sub']; ?>">
-                                <button type="submit" class="btn btn-info">Cambiar Plan</button>
-                            </form>
-
-                            <form action="../Controller/eliminarUser.php" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
-
-                        </td>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Subcripción</th>
+                        <th>Estatus</th>
+                        <th>Acciones</th>
                     </tr>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="4">No hay datos disponibles.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <?php if ($row['correo'] == "root@admin.com") {
+                                continue;
+                            }; ?>
+                            <tr class="text-center">
+                                <td><?php echo $row['id']; ?></td>
+                                <td><?php echo $row['nombre']; ?></td>
+                                <td><?php echo $row['correo']; ?></td>
+                                <td><?php echo $row['sub']; ?></td>
+                                <td>
+                                    <?php if ($row['estatus'] == 1): ?>
+                                        <span class="badge bg-success">Activo</span>
+                                    <?php else: ?>
+                                        <span class="badge bg-danger">Suspendido</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <form action="../Controller/cambiarEstatusUser.php" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                        <input type="hidden" name="estatus" value="<?php echo $row['estatus']; ?>">
+                                        <input type="hidden" name="sub" value="<?php echo $row['sub']; ?>">
+                                        <button type="submit" class="btn btn-info btn-sm">Cambiar Estatus</button>
+                                    </form>
+
+                                    <form action="../Controller/cambiarPlanUser.php" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                        <input type="hidden" name="estatus" value="<?php echo $row['estatus']; ?>">
+                                        <input type="hidden" name="sub" value="<?php echo $row['sub']; ?>">
+                                        <button type="submit" class="btn btn-primary btn-sm">Cambiar Plan</button>
+                                    </form>
+
+                                    <form action="../Controller/eliminarUser.php" method="post" class="d-inline">
+                                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" class="text-center">No hay datos disponibles.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2024 Tu Empresa. Todos los derechos reservados.</p>
+            <p><a href="#" class="text-white">Política de privacidad</a> | <a href="#" class="text-white">Términos y condiciones</a></p>
+        </div>
+    </footer>
 </body>
 
 </html>

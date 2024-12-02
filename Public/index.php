@@ -36,7 +36,7 @@ if (isset($_SESSION['id'])) {
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-        <a class="navbar-brand" href="#">QUISOCO DIGITAL</a>
+            <a class="navbar-brand" href="#">QUISOCO DIGITAL</a>
             <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -54,11 +54,6 @@ if (isset($_SESSION['id'])) {
 
                     <?php
                     if ($adminBool) {
-
-                        echo '<ol class="nav-item">
-    <a href="" class="linkNav">Subcripciones</a>
-    </ol>';
-
 
                         echo '<ol class="nav-item">
     <a href="../View/usuarios.php" class="linkNav">Usuarios</a>
@@ -93,7 +88,7 @@ if (isset($_SESSION['id'])) {
     </button>';
 
                         echo '<button class="nav-item btn-naver">
-    <a class="nav-link-btn " href="../View/registro.html">Registrarme</a>
+    <a class="nav-link-btn " href="../View/registro.php">Registrarme</a>
     </button>';
                     } else {
 
@@ -114,7 +109,7 @@ if (isset($_SESSION['id'])) {
 
 
     <!-- Main -->
-    <div class="fondo pt-2">
+    <div class="fondo py-5">
 
         <div class="planActual">
             <h1><?php if (isset($_SESSION['sub'])) {
@@ -124,22 +119,21 @@ if (isset($_SESSION['id'])) {
                 } ?></h1>
         </div>
 
-        <!--Carrucel-->
+        <!-- Carrusel -->
         <div class="carrucel mt-lg-3">
-
-            <div id="carrucelMain" class="carousel slide" data-bs-ride="true">
+            <div id="carrucelMain" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="../Img/c1.jpg" class="d-block imgCarrucel" alt="...">
+                        <img src="../Img/c1.jpg" class="d-block imgCarrucel" alt="Primera imagen">
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/c2.jpg" class="d-block imgCarrucel" alt="...">
+                        <img src="../img/c2.jpg" class="d-block imgCarrucel" alt="Segunda imagen">
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/c3.jpg" class="d-block imgCarrucel" alt="...">
+                        <img src="../img/c3.jpg" class="d-block imgCarrucel" alt="Tercera imagen">
                     </div>
                     <div class="carousel-item">
-                        <img src="../img/c4.jpg" class="d-block imgCarrucel" alt="...">
+                        <img src="../img/c4.jpg" class="d-block imgCarrucel" alt="Cuarta imagen">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carrucelMain" data-bs-slide="prev">
@@ -152,9 +146,14 @@ if (isset($_SESSION['id'])) {
                 </button>
             </div>
         </div>
-
     </div>
-
+    
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2024 Tu Empresa. Todos los derechos reservados.</p>
+            <p><a href="#" class="text-white">Política de privacidad</a> | <a href="#" class="text-white">Términos y condiciones</a></p>
+        </div>
+    </footer>
 </body>
 
 </html>

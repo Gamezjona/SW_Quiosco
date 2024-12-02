@@ -135,7 +135,7 @@ if (isset($_SESSION['id'])) {
     </button>';
 
                         echo '<button class="nav-item btn-naver">
-    <a class="nav-link-btn " href="../View/registro.html">Registrarme</a>
+    <a class="nav-link-btn " href="../View/registro.php">Registrarme</a>
     </button>';
                     } else {
 
@@ -153,52 +153,64 @@ if (isset($_SESSION['id'])) {
         </div>
     </nav>
 
+    <div class="py-5 fondo">
+        <h1 class="text-center text-white my-4">Lista de Patrocinadores</h1>
 
-
-
-
-    <h1 style="text-align: center;">Lista de Patrocinadores</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Giro</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($data)): ?>
-                <?php foreach ($data as $patrocinador): ?>
+        <div class="table-responsive container">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
                     <tr>
-                        <td><?php echo htmlspecialchars($patrocinador['id']); ?></td>
-                        <td><?php echo htmlspecialchars($patrocinador['nombre']); ?></td>
-                        <td><?php echo htmlspecialchars($patrocinador['giro']); ?></td>
-                        <td>
-                            <form action="../Controller/eliminarPtcndr.php" method="POST" style="display: inline;">
-                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($patrocinador['id']); ?>">
-                                <button type="submit" name="action" value="delete" class="btn btn-danger">Eliminar</button>
-                            </form>
-                        </td>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Giro</th>
+                        <th>Acciones</th>
                     </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="4" style="text-align: center;">No hay patrocinadores disponibles</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                    <?php if (!empty($data)): ?>
+                        <?php foreach ($data as $patrocinador): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($patrocinador['id']); ?></td>
+                                <td><?php echo htmlspecialchars($patrocinador['nombre']); ?></td>
+                                <td><?php echo htmlspecialchars($patrocinador['giro']); ?></td>
+                                <td>
+                                    <form action="../Controller/eliminarPtcndr.php" method="POST" class="d-inline">
+                                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($patrocinador['id']); ?>">
+                                        <button type="submit" name="action" value="delete" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4" class="text-center">No hay patrocinadores disponibles</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
 
-    <div class="form-container">
-        <h2>Agregar Patrocinador</h2>
-        <!-- <form action="https://ws-api-gateway-latest.onrender.com/SWPatrocinador/Nuevo" method="POST"> -->
-        <form action="../Controller/nuevoPtcndr.php" method="POST">
-            <input type="text" name="nombre" placeholder="Nombre" required>
-            <input type="text" name="giro" placeholder="Giro" required>
-            <button type="submit" class="btn btn-success">Agregar</button>
-        </form>
+        <!-- Formulario para agregar patrocinador -->
+        <div class="form-container mt-5">
+            <h2 class="text-center text-white mb-3">Agregar Patrocinador</h2>
+            <form action="../Controller/nuevoPtcndr.php" method="POST">
+                <div class="mb-3">
+                    <input type="text" name="nombre" placeholder="Nombre" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" name="giro" placeholder="Giro" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Agregar</button>
+            </form>
+        </div>
     </div>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p>© 2024 Tu Empresa. Todos los derechos reservados.</p>
+            <p><a href="#" class="text-white">Política de privacidad</a> | <a href="#" class="text-white">Términos y condiciones</a></p>
+        </div>
+    </footer>
 </body>
 
 </html>
