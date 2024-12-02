@@ -47,9 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
                     /* echo "Bienvenido, ".$_SESSION['nombre'].". ¡Has iniciado sesión exitosamente!" ;
-                    echo "<p><button><a href='../Public/index.php'>Inicio</a></button></p></div>"; */
+                    echo "<p><button><a href='../index.php'>Inicio</a></button></p></div>"; */
 
-                    header("Location: ../Public/index.php");
+                    header("Location: ../index.php");
 
                 } else {
                     echo "Contraseña incorrecta para $email.";

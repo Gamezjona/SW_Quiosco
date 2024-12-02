@@ -45,7 +45,7 @@ if(isset($_GET['funcion']) && isset($_GET['txtError'])){
 
 
         <nav class="navLinks">
-            <button class="btnNavLink" onclick="window.location.href='../Public/index.php'">
+            <button class="btnNavLink" onclick="window.location.href='../index.php'">
                 Regresar
             </button>
         </nav>

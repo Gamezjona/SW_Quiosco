@@ -17,7 +17,7 @@ if (isset($_SESSION['id'])) {
     $data = verTodoContenido();
 } else {
 
-    header("Location: ../Public/index.php");
+    header("Location: ../index.php");
 }
 
 ?>
@@ -49,7 +49,7 @@ if (isset($_SESSION['id'])) {
                 <ul class="navbar-nav">
 
                     <ol class="nav-item">
-                        <a href="../Public/index.php" class="linkNav " aria-current="page">Inicio</a>
+                        <a href="../index.php" class="linkNav " aria-current="page">Inicio</a>
                     </ol>
                     <ol class="nav-item">
                         <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
@@ -82,7 +82,7 @@ if (isset($_SESSION['id'])) {
 
 
                         /*  echo '<button class="nav-item">
-    <a class="linkNav" href="../Public/index.php">Regresar</a>
+    <a class="linkNav" href="../index.php">Regresar</a>
     </button>'; */
 
                         echo '<button class="nav-item btn-naver">

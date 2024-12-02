@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p><strong>Correo Electrónico:</strong> $correo</p>
                         <p><strong>Contraseña:</strong> " . (empty($password) ? 'No visible' : '*****') . "</p>
                         <p><em>Gracias por registrarte con nosotros.</em></p>
-                        <p><button><a href='../Public/index.php'>Iniciar Sesion</a></button></p>
+                        <p><button><a href='../index.php'>Iniciar Sesion</a></button></p>
 
                     </div>";
             } catch (Exception $e) {

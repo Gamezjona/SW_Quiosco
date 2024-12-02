@@ -8,6 +8,6 @@ session_unset();
 session_destroy();
 
 // Redirigir al usuario a la página de inicio (puedes poner cualquier otra URL)
-header("Location: ../Public/index.php");
+header("Location: ../index.php");
 exit();
 ?>

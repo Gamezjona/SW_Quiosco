@@ -21,7 +21,7 @@ if (isset($_SESSION['id'])) {
     }
 } else {
 
-    //header("Location: ../Public/index.php");
+    //header("Location: ../index.php");
 }
 
 ?>
@@ -36,9 +36,7 @@ if (isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../Source/Css/bootstrap.min.css">
     <script src="../Source/JS/sweetalert2.all.min.js"></script>
     <script src="../Source/JS/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="../Source/Css/StylePlan.css">
-
-
+    <link rel="stylesheet" href="../Source/Css/stylePlan.css">
 </head>
 
 <body>
@@ -55,7 +53,7 @@ if (isset($_SESSION['id'])) {
                 <ul class="navbar-nav">
 
                     <ol class="nav-item">
-                        <a href="../Public/index.php" class="linkNav " aria-current="page">Inicio</a>
+                        <a href="../index.php" class="linkNav " aria-current="page">Inicio</a>
                     </ol>
                     <ol class="nav-item">
                         <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
@@ -89,7 +87,7 @@ if (isset($_SESSION['id'])) {
 
 
                         /*  echo '<button class="nav-item">
-    <a class="linkNav" href="../Public/index.php">Regresar</a>
+    <a class="linkNav" href="../index.php">Regresar</a>
     </button>'; */
 
                         echo '<button class="nav-item btn-naver">
@@ -120,7 +118,7 @@ if (isset($_SESSION['id'])) {
             <div class="alert alert-warning text-center" role="alert">
                 Necesitas iniciar sesión para contratar un plan.
             </div>
-        <?php } else { ?>
+        <?php } else if (intval($_SESSION['estatus']) == 1) { ?>
             <div class="container">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
                     <!-- Plan Premium -->
@@ -134,9 +132,13 @@ if (isset($_SESSION['id'])) {
                                 <h5 class="card-title">Premium</h5>
                                 <p class="card-text">Suscríbete con este plan y podrás ver todo nuestro contenido disponible.</p>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contratarPlanModal"
-                                    <?php if (isset($_SESSION['sub']) && $_SESSION['correo'] !== "root@admin.com" && $_SESSION['sub'] === "Premium") {
+                                    <?php if (isset($_SESSION['sub']) && $adminBool != true && $_SESSION['sub'] === "Premium") {
                                         echo 'disabled aria-disabled="true"';
-                                    } ?>>
+                                    } else if($adminBool == true) {
+                                        echo 'disabled aria-disabled="true"';
+                                    }
+
+                                    ?>>
                                     Contratar
                                 </button>
                             </div>
@@ -154,9 +156,11 @@ if (isset($_SESSION['id'])) {
                                 <h5 class="card-title">Free</h5>
                                 <p class="card-text">Con este plan solo podrás visualizar un elemento del contenido.</p>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contratarPlanFreeModal"
-                                    <?php if (isset($_SESSION['sub']) && $_SESSION['correo'] !== "root@admin.com" && $_SESSION['sub'] === "Free") {
+                                    <?php if (isset($_SESSION['sub']) && $adminBool != true && $_SESSION['sub'] === "Free") {
                                         echo 'disabled aria-disabled="true"';
-                                    } ?>>
+                                    }else if($adminBool == true){
+                                        echo 'disabled aria-disabled="true"';
+                                    }?>>
                                     Contratar
                                 </button>
                             </div>
@@ -178,7 +182,7 @@ if (isset($_SESSION['id'])) {
                         </div>
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <a href="../Controller/contratarPlan.php?contrato=Premium&id=<?php echo $_SESSION['id']; ?>&estatus=<?php echo intval($_SESSION['estatus']); ?>&sub=<?php echo $_SESSION['sub']; ?>"
+                            <a href="../Controller/contratarPlan.php?contrato=Premium&id=<?php echo $_SESSION['id']; ?>&estatus=<?php echo intval($_SESSION['estatus']); ?>&sub=<?php echo $_SESSION['sub']; ?>&correo=<?php echo $_SESSION['correo']; ?>"
                                 class="btn btn-success">
                                 Contratar Plan
                             </a>
@@ -200,7 +204,7 @@ if (isset($_SESSION['id'])) {
                         </div>
                         <div class="modal-footer justify-content-center">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <a href="../Controller/contratarPlan.php?contrato=Free&id=<?php echo $_SESSION['id']; ?>&estatus=<?php echo intval($_SESSION['estatus']); ?>&sub=<?php echo $_SESSION['sub']; ?>"
+                            <a href="../Controller/contratarPlan.php?contrato=Free&id=<?php echo $_SESSION['id']; ?>&estatus=<?php echo intval($_SESSION['estatus']); ?>&sub=<?php echo $_SESSION['sub']; ?>&correo=<?php echo $_SESSION['correo']; ?>"
                                 class="btn btn-success">
                                 Contratar Plan
                             </a>
@@ -208,7 +212,7 @@ if (isset($_SESSION['id'])) {
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php }else{echo '<h1 class="text-center text-bg-warning p-3">Tu cuenta ha sido suspendida.</h1>';} ?>
     </section>
 
 

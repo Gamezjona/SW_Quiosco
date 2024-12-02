@@ -12,7 +12,7 @@ if (isset($_SESSION['id'])) {
     if ($_SESSION['correo'] == "root@admin.com") {
         $adminBool = true;
     } else {
-        header("Location: ../Public/index.php");
+        header("Location: ../index.php");
     }
     $userBool = true;
 
@@ -20,7 +20,7 @@ if (isset($_SESSION['id'])) {
     $data = verTodosPatrocinador();
 } else {
 
-    header("Location: ../Public/index.php");
+    header("Location: ../index.php");
 }
 
 ?>
@@ -36,46 +36,6 @@ if (isset($_SESSION['id'])) {
     <link rel="stylesheet" href="../Source/Css/index.css">
     <script src="../Source/JS/bootstrap.bundle.min.js"></script>
 
-
-    <style>
-        table {
-            width: 50%;
-            margin: auto;
-            border-collapse: collapse;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f4f4f4;
-        }
-
-        .form-container {
-            width: 50%;
-            margin: 20px auto;
-            text-align: center;
-        }
-
-        .form-container input {
-            margin: 5px;
-            padding: 8px;
-        }
-
-        .form-container button {
-            padding: 8px 12px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
@@ -92,7 +52,7 @@ if (isset($_SESSION['id'])) {
                 <ul class="navbar-nav">
 
                     <ol class="nav-item">
-                        <a href="../Public/index.php" class="linkNav " aria-current="page">Inicio</a>
+                        <a href="../index.php" class="linkNav " aria-current="page">Inicio</a>
                     </ol>
                     <ol class="nav-item">
                         <a href="../View/planes.php" class="linkNav">Contratar un plan</a>
@@ -127,7 +87,7 @@ if (isset($_SESSION['id'])) {
 
 
                         /*  echo '<button class="nav-item">
-    <a class="linkNav" href="../Public/index.php">Regresar</a>
+    <a class="linkNav" href="../index.php">Regresar</a>
     </button>'; */
 
                         echo '<button class="nav-item btn-naver">
